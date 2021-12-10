@@ -1,0 +1,39 @@
+<%- include('../general/header') %>
+<%- include('../general/navbar') %>
+<body>
+    <main>
+        <div class="container">
+    <form action="/miperfil/password/cambiar/<%=id%>?_method=PUT" method="POST">
+        
+    <h2 class="text-center">EDICIÓN DE CONTRASEÑA</h2>
+
+    <div class="form-group">
+        <label>Actual contraseña:</label>
+        <input type="password" name="password" class="form-control margin-input <%= locals.errors && errors.password ? 'is-invalid' : null %>" placeholder="Contraseña">
+        <% if (locals.errors && errors.password) { %>
+            <div class="text-danger">
+            <%= errors.password.msg %>
+            </div>
+        <% } %>
+    </div>
+ 
+    <div class="form-group">
+        <label>Nueva contraseña:</label>
+        <input type="password" name="nuevaContrasena" class="form-control margin-input <%= locals.errors && errors.password ? 'is-invalid' : null %>" placeholder="Nueva Contraseña">
+        <% if (locals.errors && errors.password) { %>
+            <div class="text-danger">
+            <%= errors.password.msg %>
+            </div>
+        <% } %>
+    </div>
+
+    <button type="submit" class="btn btn-secondary">Modificar contraseña</button>
+    
+</form>
+<script type="text/javascript" src="/scripts/session-start.js"></script>
+</div>
+  <%- include('../general/footer') %>
+
+</main>
+</body>
+</html>

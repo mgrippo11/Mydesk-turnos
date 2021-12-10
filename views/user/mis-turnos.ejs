@@ -1,0 +1,45 @@
+<%- include ('../general/header') %>
+<%- include ('../general/navbar') %>
+<body>
+  <div class="container">
+    <main>
+<%# ruta: reserva/user%>
+      <h2 class="text-center fs-1">Mis reservas</h2>
+      <br>
+      <table class="table table-hover" id="lista-turnos">
+          <thead>
+            <tr>
+      <table class="table" id="lista-turnos">
+          <thead class="table-light table-hover">
+            <tr class="table-dark">
+      <table class="table" id="lista-turnos">
+          <thead class="table-light table-hover">
+            <tr class="table-dark">
+              <th scope="col">Turno</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Puesto</th>
+              <th scope="col">Piso</th>
+              <th scope="col">Tipo de puesto</th>
+            </tr>
+              <% for(var i=0; i<rows.length; i++) {%>
+                <%var tipo = rows[i].escritorio_id, tpuesto = "";const f = rows[i].fecha; var options = { year: 'numeric', month: 'long', day: 'numeric' } %>
+                  <%switch(rows[i].tipo) {case 1:tpuesto = "Escritorio individual";break;case 2:tpuesto = "Mesa grupal";break;case 3:tpuesto = "Sala de reuniones";break;} %>
+                  <tr>
+                  <% const nuevaf = f.toLocaleDateString("es-ES", options);%>
+                  <td scope="col"><%= rows[i].id_turno %></td>
+                  <td scope="col"><%= nuevaf %></td>
+                  <td scope="col"><%= rows[i].escritorio_id %></td>
+                  <td scope="col"><%= rows[i].piso %></td>
+                  <td scope="col"><%= tpuesto %></td>
+                  </tr>
+              <% } %>
+          </thead>
+          <tbody>
+          </tbody>
+      </table>
+    </main>
+    
+  </div>
+  <%- include('../general/footer') %>
+</body>    
+</html>

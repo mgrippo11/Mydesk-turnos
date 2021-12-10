@@ -1,0 +1,26 @@
+<%- include ('../general/header') %>
+<%- include ('../general/navbar') %> 
+<body class>
+    <script src="http://localhost:3000/scripts/date-picker.js"></script>
+    <script src="http://localhost:3000/scripts/get-type.js"></script>
+    <div class="container">
+        <h2 class="text-center">Solicitar turno</h2>
+        <form action="/reserva/nueva" method="POST">  
+            <br>
+            <label class="form-label" id="strTipo"></label>
+            <br>            
+            <label for="date" class="form-label">Seleccione una fecha: </label>
+            <input type="date" id="date" name="fecha" class="form-control">
+            <!-- inputs ocultos -->
+            <div style="visibility: hidden;">
+                <input type="text" name="tipo" value=<%=tipo%>>
+                <input type="text" name="usuario_id" value=<%=rows[0].id_usuario%>>
+            </div>
+            <!---->
+            <button class = "btn btn-secondary" id ="updateList" type="submit">Reservar</button>                
+        </form>
+        <br>       
+    </div>    
+    <%- include('../general/footer') %>
+</body>
+</html>
