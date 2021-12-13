@@ -19,6 +19,7 @@ Funciones:
 +"Admin" -Gestion de todos los turnos solicitados por los usuarios, creacion de usuarios, gestion de perfil y cambion de contraseña.
 
 
+
 ### Notes:
 
 +reconstruir los modulos de node.
@@ -29,3 +30,4 @@ npm install
 
 npm start
 ******************************
+https://mydesk-app.herokuapp.com
