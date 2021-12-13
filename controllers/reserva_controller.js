@@ -19,11 +19,21 @@ const viewReserva = async (req, res, next) => {
 
 //OBTENER TODOS
 const getAllReservas = async (req, res, next) => {
-    const sql = 'SELECT * from turnos';
+    const f = new Date();
+    const nFecha = (f.getFullYear() + "-" + (f.getMonth() +1) + "-" + f.getDate());
+    const sql = `SELECT * from turnos WHERE fecha BETWEEN '${nFecha}' and '4016-06-30' ORDER BY fecha ASC`;
+    const sqlUsers = 'SELECT * from usuarios'
     poolDB.query(sql, (err, rows, fields) =>{
         if(!err){
-            //res.send(rows)
-            res.render("./admin/reservations-list", {rows})
+            poolDB.query(sqlUsers, (err, rowsU, fields) =>{
+                if(!err){
+                    //res.send(rows)
+                    res.render("./admin/reservations-list", {rows, rowsU})
+                }
+                else{
+                    console.error(err)
+                }
+            })
         }
         else{
             console.error(err)
@@ -48,12 +58,15 @@ const getReservasFecha = async (req, res, next) => {
 
 //OBTENER UNO
 const getReserva = async (req, res, next) => {
-    console.log(req.params.id)
+    //console.log(req.params.id)
+    const f = new Date();
+    const nFecha = (f.getFullYear() + "-" + (f.getMonth() +1) + "-" + f.getDate());
+    //console.log(nFecha)
     const id = req.params.id;
-    const sql = `SELECT * from turnos WHERE usuario_id = ${id}`;
+    const sql = `SELECT * from turnos WHERE usuario_id = ${id} AND fecha BETWEEN '${nFecha}' and '4016-06-30' ORDER BY fecha ASC`;
     poolDB.query(sql, (err, rows, fields) =>{
         if(!err){
-            res.render("./user/mis-turnos", {rows})
+            res.render("./user/mis-turnos", {rows, id})
         }
         else{
             console.error(err)
@@ -80,10 +93,12 @@ const updateReserva = async (req, res, next) => {
 //ELIMINAR
 const deleteReserva = async (req, res, next) => {
     const id = req.params.id;
-    const sql = `DELETE FROM turnos WHERE id_turno = ${id}`;
+    const rId = req.params.rId;
+    const sql = `DELETE FROM turnos WHERE id_turno = ${rId}`;
     poolDB.query(sql, (err, rows, fields) => {
         if (!err) {
-            res.send("Lar reserva se elimino correctamente!");
+            console.log("Lar reserva se elimino correctamente!");
+            res.redirect(`/reserva/${id}`)
         }
         else {
             console.error(err);
@@ -113,11 +128,13 @@ const addReserva = async (req, res, next) => {
       }
     //Valida User
     poolDB.query(sqlValidaUser, (err, rows, fields) =>{
-        const escritorio = (rows.length+1);
+        
+        
         var p;
         if(rows.length == 0){
         //Valida fecha
             poolDB.query(sqlFecha, (err, rows, fields) =>{
+                const escritorio = (rows.length+1);
                 if(rows.length < puestos){
                     switch(tipo) {
                         case "1":

@@ -2,9 +2,11 @@
 
 function guestMiddleware (req, res, next) {
 	if(req.session.userLogged) {
-		res.render('./user/workspaces-list');
+		res.redirect('/api/miperfil');
+	} else {
+		next();
 	}
-	next();
+	
 }
 
 module.exports = guestMiddleware;

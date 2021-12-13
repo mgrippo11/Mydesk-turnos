@@ -7,10 +7,10 @@ const { validationResult } = require('express-validator');
 
 //OBTENER TODOS
 const getAllUsers = async (req, res, next) => {
-    const sql = 'SELECT * from usuarios';
+    const sql = 'SELECT * from usuarios WHERE es_admin = 0';
     poolDB.query(sql, (err, rows, fields) =>{
         if(!err){
-            res.send(rows)
+            res.render('./admin/users-list', {rows})
         }
         else{
             console.error(err)
@@ -62,7 +62,7 @@ const addUser = async (req, res, next) => {
 
     poolDB.query(sql, data, (err, rows, fields) =>{
         if(!err){
-            res.redirect('/login')
+            res.redirect('/api/users')
         }
         else{
             res.render('error')
@@ -112,6 +112,7 @@ const miPerfil = (req,res) => {
     const legajo = req.cookies.legajo;
 
     const sql = `SELECT * from usuarios WHERE legajo = ${legajo}`;
+    const msg = ''
     poolDB.query(sql, (err, rows, fields) =>{
         if(!err){
             res.render('./user/mi-perfil', {rows})
@@ -124,28 +125,71 @@ const miPerfil = (req,res) => {
 
 const editarPassword = async (req, res) => {
     const id = await req.params.id;
-    return res.render('./user/editar-pass', {id})
+    res.render('./user/editar-pass', {id})
 }
 
 const checkEditarPassword = async (req, res) => {
     let id = await req.params.id;
 
-    let contrasenaInput = req.body.password
-    let contrasenaBdd = password.passHaash
+    let oldP = req.body.oldPassword
+    let newP = req.body.newPassword
+    let passHash = await bcryptjs.hash(newP, 4);
+    const sqlUser = `SELECT * FROM usuarios WHERE id_usuario = ${id}`
+    const sql = `UPDATE usuarios SET password= '${passHash}' WHERE id_usuario = ${id}`;
 
-    if (bcryptjs.compareSync(contrasenaInput, contrasenaBdd) == true){
-        const sql = `UPDATE usuarios SET password= '${password}' WHERE id_usuario = ${id}`;
-
-       const password = bcryptjs.hashSync(req.body.nuevaContrasena, 10)       
-        await poolDB.query(sql, password, (err, rows, fields) =>{
+    if(oldP.length > 0){
+        poolDB.query(sqlUser, async (err, rows) => {
             if(!err){
-                res.send("La contraseña se actualizo correctamente!");
+                if(await bcryptjs.compare(oldP, rows[0].password)){
+                    if(newP.length > 0){
+                        poolDB.query(sql, async (err, rowsU) => {
+                            if(!err){
+                                console.log("Se cambio la contraseña corectamente!")
+                                res.render('./user/editar-pass', {id,
+                                    ok: {
+                                        newPassword: {
+                                            msg: "¡La contraseña se cambio correctamente!"
+                                        }
+                                    }
+                                })
+                            }else{
+                                console.error(err)
+                            }
+                        })
+                    }else{
+                        console.log("contraseña vacia")
+                        res.render('./user/editar-pass', {id,
+                        errors: {
+                            newPassword: {
+                                msg: "La contraseña nueva está vacía"
+                            }
+                        }
+                    })                 
+                    }
+                }else{
+                    console.log("la contraseña actual no coincide")
+                    res.render('./user/editar-pass', {id,
+                        errors: {
+                            oldPassword: {
+                                msg: "La contraseña actual no coincide"
+                            }
+                        }
+                    })                     
+                }
             }
             else{
                 console.error(err)
             }
         })
-        }
+    }else{
+        res.render('./user/editar-pass', {id,
+            errors: {
+                oldPassword: {
+                    msg: "La contraseña actual está vacía"
+                }
+            }
+        })
+    }
 }
 
 module.exports = {
