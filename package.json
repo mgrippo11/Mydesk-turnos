@@ -16,6 +16,7 @@
     "express-mysql-session": "^2.1.7",
     "express-session": "^1.17.2",
     "express-validator": "^6.13.0",
+    "gh-pages": "^4.0.0",
     "http-errors": "~1.6.3",
     "jade": "^0.29.0",
     "method-override": "^3.0.0",
@@ -31,7 +32,6 @@
   },
   "description": "Cohorte 01 - Grupo 01",
   "main": "app.js",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/No-Country/turnos-web-oficinas.git"
