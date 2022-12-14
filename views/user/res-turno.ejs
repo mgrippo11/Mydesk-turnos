@@ -1,0 +1,23 @@
+<%- include ('../general/header') %>
+<body>
+    <%- include ('../general/navbar') %>
+<main>
+    <div class="container">
+        <div class="alert <%= alert %> " role="alert">
+            <h3 class="text-start"><%= message %></h3>
+            <%= error %> 
+            <!-- <p>codigo</p> -->
+            <p><%= date %> </p>
+            <p><%= escritorio %> </p>
+            <!-- <p>id</p> -->
+            <!--<p>piso </p>-->
+            <br>
+            <a href="/reserva/<%= id %>" class="btn btn-light btn-lg" role="button">Mis turnos</a>
+            <a href="/home" class="btn btn-light btn-lg" role="button">Volver al inicio</a>
+        </div>
+    </div>
+</main>
+    <%- include('../general/footer') %>
+
+</body>    
+</html>

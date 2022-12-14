@@ -1,0 +1,41 @@
+<%- include ('../general/header') %>
+<body>
+    <%- include ('../general/navbar') %> 
+    <div class="container">
+        <h2 class="text-center">Usuario nuevo</h2>
+        <form method="POST" action="/api/user/crear" id="form-create">
+          <div class="form-group">  
+            <label>Nombre y apellido:</label>
+            <input type="text" class="form-control margin-input <%= locals.errors && errors.nombre? 'is-invalid' : null %>" value="<%= locals.oldData ? oldData.nombre : null %>" name="nombre">     
+            <% if (locals.errors && errors.nombre) { %>
+              <div class="text-danger">
+              <%= errors.nombre.msg %>
+              </div>
+          <% } %>       
+          </div>
+          <div class="form-group">  
+            <label for="legajo">Nº de Legajo:</label>
+            <input type="text" class="form-control margin-input <%= locals.errors && errors.legajo? 'is-invalid' : null %>" value="<%= locals.oldData ? oldData.legajo : null %>" name="legajo">    
+            <% if (locals.errors && errors.legajo) { %>
+              <div class="text-danger">
+              <%= errors.legajo.msg %>
+              </div>
+          <% } %>      
+          </div> 
+          <div class="form-group">  
+            <label for="email">Correo electrónico:</label>
+            <input type="email" class="form-control margin-input <%= locals.errors && errors.mail? 'is-invalid' : null %>" value="<%= locals.oldData ? oldData.mail : null %>" name="mail" placeholder="email@ejemplo.com">    
+            <% if (locals.errors && errors.mail) { %>
+              <div class="text-danger">
+              <%= errors.mail.msg %>
+              </div>
+          <% } %>      
+          </div> 
+          
+          <button type="submit" id="create" class="btn btn-secondary">Crear usuario</button>
+        </form>
+    </div>
+    <%- include('../general/footer') %>
+
+</body>
+</html>

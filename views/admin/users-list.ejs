@@ -1,0 +1,32 @@
+<%# muestra una lista de todos los usuarios - accesible desde Usuarios %> 
+<%- include ('../general/header'); %>
+<body>
+    <% include ('../general/navbar'); %> 
+    <div class container>
+        <h2>Listado de usuarios</h2>
+    <!-- 
+        <div class="input-group">
+            <div class="form-outline">
+              <input type="search" id="form1" class="form-control" />
+              <label class="form-label" for="form1">Search</label>
+            </div>
+            <button type="button" class="btn btn-primary">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+    -->          
+        <table class="table table-hover" id="lista-usuarios">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Legajo</th>
+                <th scope="col">Email</th>                
+            <!--<th scope="col">Editar</th>-->
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+    </div>
+</body>    

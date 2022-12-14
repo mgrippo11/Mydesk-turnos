@@ -1,0 +1,38 @@
+<%- include('./general/header') %>
+<%- include('./general/navbar') %>
+<body>
+    <main>    
+        <div class="container">
+            <h2 class="text-center">Contacto</h2>
+        <form method="POST" action="#" class="formulario-registro" enctype="multipart/form-data">
+            <h3>Dejanos tu consulta o sugerencia</h3>
+        <div class="form-group">
+            <label>Nombre:</label>
+            <input type="text" class="form-control margin-input" name="nombre" placeholder="Nombre">
+                <div class="text-danger">
+                </div>
+        </div>
+        <div class="form-group">
+            <label>Dirección de email:</label>
+            <input id="email" class="form-control margin-input" type="email" name="mail" placeholder="ejemplo@email.com">
+                <div class="text-danger">
+                </div>
+        </div>
+        <div class="form-group">
+            <label>Consulta:</label>
+            <input id="texto" class="form-control margin-input" type="text" name="texto" placeholder="Consulta">
+            <div class="text-danger">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-secondary">Enviar</button>
+        </form>
+        
+    </div>
+    
+</main>
+    
+    <%- include('./general/footer') %>
+    
+</body>
+</html>
