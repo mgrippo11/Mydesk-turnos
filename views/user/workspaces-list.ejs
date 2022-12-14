@@ -1,0 +1,102 @@
+<%- include ('../general/header') %> 
+<%- include('../general/navbar') %>
+<body>
+  <!--Inicia Tipos de oficina-->
+  <div class="container">
+    <div class="div-hola">
+      <h2>Hola, <%=rows[0].nombre%></h2>
+      <h3>Puestos disponibles</h3>
+    </div>
+    <div class="row mb-2">
+      <article class="col-lg-6 card-reserva">
+        <div class="padingprod">
+          <div
+            class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col-4 nop">
+              <img
+                class="img1"
+                style="width: 100%;"
+                src="/images/escritorio_indiv.jpg"
+                alt=""
+              />
+            </div>
+            <div class="col p-4 d-flex flex-column position-static">
+              <h2 class="mb-0 titulo1">Escritorio individual</h2>
+              <p class="card-text mb-auto">
+                Reserva individual de 8 hs con multiples beneficios
+              </p>
+              <div class="row">
+                <!--<div class="col-6 puesto-disponible">
+                  <p><%=pl1 %> disponibles</p>
+                </div>-->
+                <div class="col-6">
+                  <a class="btn btn-primary" href="/reserva/ver/1">Reservar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="col-lg-6 card-reserva">
+        <div class="padingprod">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row  mb-4 shadow-sm  h-md-250 position-relative">
+            <div class="col-4 nop">
+              <img
+                class="img1"
+                style="width: auto; height: auto"
+                src="/images/oficina-privada.png"
+                alt=""
+              />
+            </div>
+            <div class="col p-4 d-flex flex-column position-static">
+              <h2 class="mb-0 titulo1">Mesa grupal para 4 personas</h2>
+              <p class="card-text mb-auto">
+                Reserva individual de 8 hs con multiples beneficios
+              </p>
+              <div class="row">
+                <!--<div class="col-6 puesto-disponible">
+                  <p><%=pl2 %> disponibles</p>
+                </div>-->
+                <div class="col-6">
+                  <a class="btn btn-primary" href="/reserva/ver/2">Reservar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="col-lg-6 card-reserva">
+        <div class="padingprod">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm -md-250 position-relative">
+            <div class="col-4 nop">
+              <img
+                class="img1"
+                style="width: 110%; height: auto;"
+                src="/images/sala-reuniones.jpg"
+                alt=""
+              />
+            </div>
+            <div class="col p-4 d-flex flex-column position-static">
+              <h2 class="mb-0 titulo1">Sala de reuniones</h2>
+              <p class="card-text mb-auto">
+                Reserva individual de 8 hs con multiples beneficios
+              </p>
+              <div class="row">
+                <!--<div class="col-6 puesto-disponible">
+                  <p>pl3 disponibles</p>
+                </div>-->
+                <div class="col-6">
+                  <a class="btn btn-primary" href="/reserva/ver/3">Reservar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div style="margin-top: 6%;"></div>
+  <%- include('../general/footer') %>
+  <!--Termina Tipos de oficina-->
+</body>
+</html>

@@ -1,0 +1,64 @@
+<%- include('../general/header') %>
+ <%- include ('../general/navbar') %>
+<body>
+   
+  <main>
+  <script src="../scripts/date-picker.js"></script>
+  
+  <div class="container">
+    <h2 class="text-center">Listado de reservas</h2>
+    <!--<form action="/reserva/reservas/:date" method="get">
+      <label for="date" class="form-label">Seleccione una fecha: </label>
+      <input type="date" id="date" class="form-control" />
+      <br />
+      
+      <button class="btn btn-secondary" id="updateList" type="submit">
+        Actualizar lista
+      </button>-->
+    </form>
+    <br />
+    <form action="" method="post">
+      <h3 class="text-start" id="dateOutput"></h3>
+      <!-- aca se va a mostrar la lista de las reservas del día elegido -->
+      <table class="table table-hover" id="lista-turnos">
+        <thead>
+          <tr>
+            <th scope="col">Turno</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Tipo de puesto</th>
+            <th scope="col">Nombre usuario</th>
+            <th scope="col">Legajo</th>
+            <th scope="col">ID escritorio</th>
+            <th scope="col">Puesto</th>
+            <th scope="col">Piso</th>
+        <!--<th scope="col">Confirmar asistencia</th>-->     
+        <!--<th scope="col">Cancelar turno</th>-->    
+      </tr>
+      <% for(var i=0; i<rows.length; i++) {%>
+        <%var tipo = rows[i].escritorio_id, tpuesto = "";const f = rows[i].fecha; var options = { year: 'numeric', month: 'long', day: 'numeric' } %>
+          <%switch(rows[i].tipo) {case 1:tpuesto = "Escritorio individual";break;case 2:tpuesto = "Mesa grupal";break;case 3:tpuesto = "Sala de reuniones";break;} %>
+          <tr>
+          <% const nuevaf = f.toLocaleDateString("es-ES", options);%>
+          <td scope="col"><%= rows[i].id_turno %></td>
+          <td scope="col"><%= nuevaf %></td>
+          <td scope="col"><%= tpuesto %></td>
+          <td scope="col"><%= "x" %></td>
+          <td scope="col"><%= "x" %></td>
+          <td scope="col"><%= "x" %></td>
+          <td scope="col"><%= rows[i].escritorio_id %></td>
+          <td scope="col"><%= rows[i].piso %></td>
+          </tr>
+      <% } %>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </form>
+  </div>
+
+</main>
+<div style="margin-top: 28%;"></div>
+<%- include('../general/footer') %>
+
+</body>    
+</html>
